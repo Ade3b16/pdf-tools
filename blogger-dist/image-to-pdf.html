@@ -1,0 +1,105 @@
+<!-- Blogger Page Permalink Slug: image-to-pdf (/p/image-to-pdf.html) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="/p/pdf-tools.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">JPG / PNG / WebP to PDF</h1>
+    <p class="tool-subtitle">
+      Combine JPG, PNG, and WebP images into a PDF document with custom page size and margins.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select images">
+      <div
+        id="img2pdf-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop images here or click to select files"
+      >
+        <h2 class="dropzone-title">Drop JPG, PNG, or WebP files here, or click to select</h2>
+        <p class="dropzone-hint">Accepts multiple image files.</p>
+        <span class="dropzone-btn">Select Images</span>
+        <input
+          type="file"
+          id="img2pdf-file-input"
+          class="sr-only-input"
+          accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+          multiple
+        />
+      </div>
+    </section>
+
+    <div id="img2pdf-status" class="status-banner info" hidden></div>
+
+    <section id="img2pdf-config-panel" class="tool-panel" hidden aria-label="Image list and PDF layout settings">
+      <div class="file-list-header">
+        <div class="section-title" style="margin-bottom: 0;">
+          <span>Selected Images</span>
+          <span id="img2pdf-count-badge" class="file-count-badge">0 images</span>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button type="button" id="img2pdf-add-more-btn" class="secondary-btn">+ Add Images</button>
+          <button type="button" id="img2pdf-clear-btn" class="danger-btn">Clear</button>
+        </div>
+      </div>
+
+      <ul id="img2pdf-list" class="file-list" aria-label="Ordered list of images"></ul>
+
+      <div class="form-grid" style="margin-top: 16px;">
+        <div class="form-group">
+          <label for="img2pdf-page-size" class="form-label">Page Size</label>
+          <select id="img2pdf-page-size" class="form-select">
+            <option value="fit" selected>Fit to Image Dimensions</option>
+            <option value="a4">A4 (210 × 297 mm)</option>
+            <option value="letter">US Letter (8.5 × 11 in)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="img2pdf-orientation" class="form-label">Orientation</label>
+          <select id="img2pdf-orientation" class="form-select">
+            <option value="auto" selected>Auto (Match Image)</option>
+            <option value="portrait">Portrait</option>
+            <option value="landscape">Landscape</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="img2pdf-margin" class="form-label">Margin</label>
+          <select id="img2pdf-margin" class="form-select">
+            <option value="0">None (0 pt)</option>
+            <option value="20" selected>Small (20 pt)</option>
+            <option value="40">Standard (40 pt)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="img2pdf-output-name" class="form-label">Output Filename</label>
+          <input
+            type="text"
+            id="img2pdf-output-name"
+            class="form-input"
+            value="images-converted.pdf"
+            placeholder="images-converted.pdf"
+          />
+        </div>
+      </div>
+
+      <div class="action-bar" style="margin-top: 16px;">
+        <button type="button" id="img2pdf-submit-btn" class="primary-btn" disabled>
+          <span>Create PDF</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/utils.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/image-to-pdf/image-to-pdf.js"></script>

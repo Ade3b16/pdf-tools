@@ -1,0 +1,95 @@
+<!-- Blogger Page Permalink Slug: compare-pdf (/p/compare-pdf.html) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="/p/pdf-tools.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">Compare Two PDFs Visually</h1>
+    <p class="tool-subtitle">
+      Load Original (File A) and Revised (File B) PDFs side-by-side to highlight pixel and text differences in crimson red.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select two PDF files to compare">
+      <div class="form-grid">
+        <div>
+          <h2 class="section-title">1. Original PDF (File A)</h2>
+          <div
+            id="cmp-dropzone-a"
+            class="dropzone"
+            role="button"
+            tabindex="0"
+            style="padding: 28px 16px;"
+            aria-label="Select Original PDF File A"
+          >
+            <div id="cmp-label-a" class="dropzone-title">Select Original PDF (File A)</div>
+            <p id="cmp-meta-a" class="dropzone-hint">Drop .pdf here or click to browse</p>
+            <span class="dropzone-btn">Choose File A</span>
+            <input type="file" id="cmp-input-a" class="sr-only-input" accept=".pdf,application/pdf" />
+          </div>
+        </div>
+
+        <div>
+          <h2 class="section-title">2. Revised PDF (File B)</h2>
+          <div
+            id="cmp-dropzone-b"
+            class="dropzone"
+            role="button"
+            tabindex="0"
+            style="padding: 28px 16px;"
+            aria-label="Select Revised PDF File B"
+          >
+            <div id="cmp-label-b" class="dropzone-title">Select Revised PDF (File B)</div>
+            <p id="cmp-meta-b" class="dropzone-hint">Drop .pdf here or click to browse</p>
+            <span class="dropzone-btn">Choose File B</span>
+            <input type="file" id="cmp-input-b" class="sr-only-input" accept=".pdf,application/pdf" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="cmp-status" class="status-banner info" hidden></div>
+
+    <section id="cmp-viewer-panel" class="tool-panel" hidden aria-label="Side-by-side visual comparison">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span id="cmp-diff-badge" class="file-count-badge">0.00% difference on this page</span>
+          <button type="button" id="cmp-scan-all-btn" class="secondary-btn">Scan All Pages for Changes</button>
+        </div>
+
+        <div style="display: inline-flex; align-items: center; gap: 6px;">
+          <button type="button" id="cmp-prev-page" class="icon-btn" aria-label="Previous page">←</button>
+          <span id="cmp-page-indicator" class="file-count-badge">Page 1 of 1</span>
+          <button type="button" id="cmp-next-page" class="icon-btn" aria-label="Next page">→</button>
+        </div>
+      </div>
+
+      <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; align-items: start;"
+      >
+        <div>
+          <div class="form-label" style="margin-bottom: 6px;">Original (File A)</div>
+          <canvas id="cmp-canvas-a" style="border: 1px solid var(--border-strong); background: #fff; border-radius: 4px; width: 100%; height: auto;"></canvas>
+        </div>
+
+        <div>
+          <div class="form-label" style="margin-bottom: 6px;">Revised (File B)</div>
+          <canvas id="cmp-canvas-b" style="border: 1px solid var(--border-strong); background: #fff; border-radius: 4px; width: 100%; height: auto;"></canvas>
+        </div>
+
+        <div>
+          <div class="form-label" style="margin-bottom: 6px; color: var(--primary);">Highlighted Differences (Red = Changed)</div>
+          <canvas id="cmp-canvas-diff" style="border: 1px solid var(--primary); background: #fff; border-radius: 4px; width: 100%; height: auto;"></canvas>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/utils.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/compare-pdf/compare-pdf.js"></script>

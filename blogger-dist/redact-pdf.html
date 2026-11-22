@@ -1,0 +1,96 @@
+<!-- Blogger Page Permalink Slug: redact-pdf (/p/redact-pdf.html) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="/p/pdf-tools.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">Redact PDF</h1>
+    <p class="tool-subtitle">
+      Drag redaction boxes over sensitive text or numbers. Redacted pages are raster-baked so underlying text streams are permanently removed.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select PDF file">
+      <div
+        id="red-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop a PDF file here or click to select a file"
+      >
+        <h2 class="dropzone-title">Drop a PDF file here, or click to select</h2>
+        <p class="dropzone-hint">Accepts a single .pdf file.</p>
+        <span class="dropzone-btn">Select PDF File</span>
+        <input
+          type="file"
+          id="red-file-input"
+          class="sr-only-input"
+          accept=".pdf,application/pdf"
+        />
+      </div>
+    </section>
+
+    <div id="red-status" class="status-banner info" hidden></div>
+
+    <section id="red-config-panel" class="tool-panel" hidden aria-label="Redaction workspace">
+      <div class="file-list-header" style="margin-bottom: 16px;">
+        <div class="file-item" style="width: 100%;">
+          <div class="file-item-info">
+            <div class="file-item-details">
+              <div id="red-file-name" class="file-item-name">document.pdf</div>
+              <div id="red-file-meta" class="file-item-meta">0 KB • 0 pages</div>
+            </div>
+          </div>
+          <div class="file-item-actions">
+            <span id="red-box-counter" class="file-count-badge">0 redactions</span>
+            <button type="button" id="red-change-file-btn" class="secondary-btn">Change File</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+          <label for="red-fill-color" class="form-label" style="margin: 0;">Redaction Fill</label>
+          <select id="red-fill-color" class="form-select" style="width: auto;">
+            <option value="#000000" selected>Solid Blackout (#000000)</option>
+            <option value="#ffffff">Solid Whiteout (#FFFFFF)</option>
+          </select>
+          <button type="button" id="red-undo-btn" class="secondary-btn">Undo Box</button>
+          <button type="button" id="red-clear-page-btn" class="secondary-btn">Clear Page</button>
+        </div>
+
+        <div style="display: inline-flex; align-items: center; gap: 6px;">
+          <button type="button" id="red-prev-page" class="icon-btn" aria-label="Previous page">←</button>
+          <span id="red-page-indicator" class="file-count-badge">Page 1 of 1</span>
+          <button type="button" id="red-next-page" class="icon-btn" aria-label="Next page">→</button>
+        </div>
+      </div>
+
+      <span class="form-hint" style="display: block; margin-bottom: 8px;">
+        Click and drag across any area on the page below to draw a permanent redaction box.
+      </span>
+
+      <div style="display: flex; justify-content: flex-start; overflow: auto; touch-action: none;">
+        <canvas
+          id="red-preview-canvas"
+          style="border: 1px solid var(--border-strong); background: #ffffff; border-radius: 4px; cursor: crosshair; max-width: 100%; height: auto;"
+        ></canvas>
+      </div>
+
+      <div class="action-bar" style="margin-top: 20px;">
+        <button type="button" id="red-submit-btn" class="primary-btn">
+          <span>Apply Redactions &amp; Download</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/utils.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/redact-pdf/redact-pdf.js"></script>

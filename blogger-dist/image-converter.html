@@ -1,0 +1,94 @@
+<!-- Blogger Page Permalink Slug: image-converter (/p/image-converter.html) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="/p/pdf-tools.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">Image Converter (WebP / PNG / JPG)</h1>
+    <p class="tool-subtitle">
+      Batch-convert and resize images between WebP, PNG, and JPG locally in your browser.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select images">
+      <div
+        id="imgconv-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop images here or click to select files"
+      >
+        <h2 class="dropzone-title">Drop WebP, PNG, or JPG images here, or click to select</h2>
+        <p class="dropzone-hint">Accepts single or multiple image files for batch conversion.</p>
+        <span class="dropzone-btn">Select Images</span>
+        <input
+          type="file"
+          id="imgconv-file-input"
+          class="sr-only-input"
+          accept=".webp,.png,.jpg,.jpeg,image/webp,image/png,image/jpeg"
+          multiple
+        />
+      </div>
+    </section>
+
+    <div id="imgconv-status" class="status-banner info" hidden></div>
+
+    <section id="imgconv-config-panel" class="tool-panel" hidden aria-label="Image conversion settings">
+      <div class="file-list-header">
+        <div class="section-title" style="margin-bottom: 0;">
+          <span>Queued Images</span>
+          <span id="imgconv-count-badge" class="file-count-badge">0 images</span>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button type="button" id="imgconv-add-more-btn" class="secondary-btn">+ Add Images</button>
+          <button type="button" id="imgconv-clear-btn" class="danger-btn">Clear</button>
+        </div>
+      </div>
+
+      <ul id="imgconv-list" class="file-list" aria-label="List of images to convert"></ul>
+
+      <div class="form-grid" style="margin-top: 16px;">
+        <div class="form-group">
+          <label for="imgconv-format" class="form-label">Target Output Format</label>
+          <select id="imgconv-format" class="form-select">
+            <option value="jpeg" selected>JPG (.jpg)</option>
+            <option value="png">PNG (.png — Lossless)</option>
+            <option value="webp">WebP (.webp — Modern Compact)</option>
+          </select>
+        </div>
+
+        <div id="imgconv-quality-group" class="form-group">
+          <label for="imgconv-quality" class="form-label">Encoding Quality</label>
+          <div class="range-slider-row">
+            <input type="range" id="imgconv-quality" min="30" max="100" step="5" value="90" />
+            <span id="imgconv-quality-badge" class="range-value-badge">90%</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="imgconv-resize" class="form-label">Dimensions / Resize</label>
+          <select id="imgconv-resize" class="form-select">
+            <option value="original" selected>Keep Original Dimensions</option>
+            <option value="max-1920">Fit Within 1920 px Max</option>
+            <option value="max-1280">Fit Within 1280 px Max</option>
+            <option value="scale-50">Scale to 50%</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="action-bar" style="margin-top: 20px;">
+        <button type="button" id="imgconv-submit-btn" class="primary-btn" disabled>
+          <span>Convert &amp; Download</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/utils.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/image-converter/image-converter.js"></script>

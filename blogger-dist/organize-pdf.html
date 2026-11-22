@@ -1,0 +1,66 @@
+<!-- Blogger Page Permalink Slug: organize-pdf (/p/organize-pdf.html) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="/p/pdf-tools.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">Organize PDF Pages</h1>
+    <p class="tool-subtitle">
+      Reorder, rotate, duplicate, or delete individual pages using page thumbnails.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select PDF file">
+      <div
+        id="org-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop a PDF file here or click to select a file"
+      >
+        <h2 class="dropzone-title">Drop a PDF file here, or click to select</h2>
+        <p class="dropzone-hint">Accepts a single .pdf file.</p>
+        <span class="dropzone-btn">Select PDF File</span>
+        <input
+          type="file"
+          id="org-file-input"
+          class="sr-only-input"
+          accept=".pdf,application/pdf"
+        />
+      </div>
+    </section>
+
+    <div id="org-status" class="status-banner info" hidden></div>
+
+    <section id="org-grid-panel" class="tool-panel" hidden aria-label="Page thumbnail organizer">
+      <div class="file-list-header" style="margin-bottom: 12px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span id="org-file-name" style="font-weight: 600; font-size: 14px;">document.pdf</span>
+          <span id="org-page-count" class="file-count-badge">0 pages</span>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button type="button" id="org-reverse-btn" class="secondary-btn">Reverse Order</button>
+          <button type="button" id="org-reset-btn" class="secondary-btn">Reset Original</button>
+          <button type="button" id="org-change-file-btn" class="secondary-btn">Change File</button>
+        </div>
+      </div>
+
+      <div id="org-thumbnail-grid" class="thumbnail-grid" aria-live="polite"></div>
+
+      <div class="action-bar" style="margin-top: 16px;">
+        <button type="button" id="org-submit-btn" class="primary-btn">
+          <span>Save Organized PDF</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/utils.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/organize-pdf/organize-pdf.js"></script>

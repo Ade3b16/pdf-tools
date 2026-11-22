@@ -1,0 +1,113 @@
+<!-- Blogger Page Permalink Slug: extract-pdf (/p/extract-pdf.html) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="/p/pdf-tools.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">Extract Text &amp; Images</h1>
+    <p class="tool-subtitle">
+      Extract selectable text into a .txt file or export rendered page images into a ZIP archive.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select PDF file">
+      <div
+        id="ext-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop a PDF file here or click to select a file"
+      >
+        <h2 class="dropzone-title">Drop a PDF file here, or click to select</h2>
+        <p class="dropzone-hint">Accepts a single .pdf file.</p>
+        <span class="dropzone-btn">Select PDF File</span>
+        <input
+          type="file"
+          id="ext-file-input"
+          class="sr-only-input"
+          accept=".pdf,application/pdf"
+        />
+      </div>
+    </section>
+
+    <div id="ext-status" class="status-banner info" hidden></div>
+
+    <section id="ext-config-panel" class="tool-panel" hidden aria-label="Extraction settings and text output">
+      <div class="file-list-header" style="margin-bottom: 16px;">
+        <div class="file-item" style="width: 100%;">
+          <div class="file-item-info">
+            <div class="file-item-details">
+              <div id="ext-file-name" class="file-item-name">document.pdf</div>
+              <div id="ext-file-meta" class="file-item-meta">0 KB • 0 pages</div>
+            </div>
+          </div>
+          <div class="file-item-actions">
+            <button type="button" id="ext-change-file-btn" class="secondary-btn">Change File</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+        <h2 class="section-title" style="margin-bottom: 0;">Extraction Mode</h2>
+        <div class="toggle-tabs" role="tablist" aria-label="Extraction mode">
+          <button type="button" class="toggle-tab active" data-ext-tab="text">Extract Text (.txt)</button>
+          <button type="button" class="toggle-tab" data-ext-tab="images">Export Page Images (.zip)</button>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="ext-range-input" class="form-label">Pages to Extract</label>
+          <input
+            type="text"
+            id="ext-range-input"
+            class="form-input"
+            value="all"
+            placeholder="all or e.g. 1-5, 8"
+          />
+          <span id="ext-range-hint" class="form-hint">Enter "all" or custom page ranges.</span>
+        </div>
+
+        <div id="ext-img-format-group" class="form-group" hidden>
+          <label for="ext-img-format" class="form-label">Image Format</label>
+          <select id="ext-img-format" class="form-select">
+            <option value="png" selected>PNG</option>
+            <option value="jpeg">JPG</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="ext-text-result-wrap" style="margin-top: 16px;" hidden>
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 6px;">
+          <label for="ext-text-output" class="form-label">Extracted Text</label>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span id="ext-text-stats" class="file-count-badge">0 words</span>
+            <button type="button" id="ext-copy-btn" class="secondary-btn">Copy Text</button>
+          </div>
+        </div>
+        <textarea
+          id="ext-text-output"
+          class="form-textarea"
+          rows="11"
+          readonly
+          style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 13px;"
+        ></textarea>
+      </div>
+
+      <div class="action-bar" style="margin-top: 16px;">
+        <button type="button" id="ext-submit-btn" class="primary-btn">
+          <span id="ext-submit-label">Extract Text</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/utils.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/extract-pdf/extract-pdf.js"></script>

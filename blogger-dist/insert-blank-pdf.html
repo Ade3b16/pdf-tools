@@ -1,0 +1,121 @@
+<!-- Blogger Page Permalink Slug: insert-blank-pdf (/p/insert-blank-pdf.html) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="/p/pdf-tools.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">Insert Blank Pages</h1>
+    <p class="tool-subtitle">
+      Add blank pages before or after specific page numbers, or interleave blank note-taking pages after every page.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select PDF file">
+      <div
+        id="blank-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop a PDF file here or click to select a file"
+      >
+        <h2 class="dropzone-title">Drop a PDF file here, or click to select</h2>
+        <p class="dropzone-hint">Accepts a single .pdf file.</p>
+        <span class="dropzone-btn">Select PDF File</span>
+        <input
+          type="file"
+          id="blank-file-input"
+          class="sr-only-input"
+          accept=".pdf,application/pdf"
+        />
+      </div>
+    </section>
+
+    <div id="blank-status" class="status-banner info" hidden></div>
+
+    <section id="blank-config-panel" class="tool-panel" hidden aria-label="Blank page insertion settings">
+      <div class="file-list-header" style="margin-bottom: 16px;">
+        <div class="file-item" style="width: 100%;">
+          <div class="file-item-info">
+            <div class="file-item-details">
+              <div id="blank-file-name" class="file-item-name">document.pdf</div>
+              <div id="blank-file-meta" class="file-item-meta">0 KB • 0 pages</div>
+            </div>
+          </div>
+          <div class="file-item-actions">
+            <button type="button" id="blank-change-file-btn" class="secondary-btn">Change File</button>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Insertion Position</h2>
+      <div class="options-grid" role="radiogroup" aria-label="Insertion mode">
+        <label class="option-card selected" data-blank-card="after">
+          <input type="radio" name="blank-mode" value="after" checked />
+          <div>
+            <div class="option-card-title">After Specific Page(s)</div>
+            <div class="option-card-desc">Insert blank page(s) immediately after the target page numbers.</div>
+          </div>
+        </label>
+
+        <label class="option-card" data-blank-card="before">
+          <input type="radio" name="blank-mode" value="before" />
+          <div>
+            <div class="option-card-title">Before Specific Page(s)</div>
+            <div class="option-card-desc">Insert blank page(s) before target pages (e.g. Page 1 for a blank front cover).</div>
+          </div>
+        </label>
+
+        <label class="option-card" data-blank-card="every">
+          <input type="radio" name="blank-mode" value="every" />
+          <div>
+            <div class="option-card-title">After Every Page (Note Handout)</div>
+            <div class="option-card-desc">Interleave blank page(s) after every single page in the document.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="form-grid" style="margin-top: 16px;">
+        <div id="blank-target-group" class="form-group">
+          <label for="blank-target-pages" class="form-label">Target Page Numbers</label>
+          <input
+            type="text"
+            id="blank-target-pages"
+            class="form-input"
+            value="1"
+            placeholder="e.g. 1, 3, 5"
+          />
+          <span id="blank-target-hint" class="form-hint">Enter page numbers or ranges separated by commas.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="blank-count" class="form-label">Blank Pages per Insertion</label>
+          <input type="number" id="blank-count" class="form-input" value="1" min="1" max="20" />
+        </div>
+
+        <div class="form-group">
+          <label for="blank-size" class="form-label">Blank Page Dimensions</label>
+          <select id="blank-size" class="form-select">
+            <option value="match" selected>Match Neighboring Page Size</option>
+            <option value="a4-p">A4 Portrait (595 × 842 pt)</option>
+            <option value="a4-l">A4 Landscape (842 × 595 pt)</option>
+            <option value="letter-p">US Letter Portrait (612 × 792 pt)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="action-bar" style="margin-top: 20px;">
+        <button type="button" id="blank-submit-btn" class="primary-btn">
+          <span>Insert Blank Pages</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/utils.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/insert-blank-pdf/insert-blank-pdf.js"></script>

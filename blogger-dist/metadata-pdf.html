@@ -1,0 +1,98 @@
+<!-- Blogger Page Permalink Slug: metadata-pdf (/p/metadata-pdf.html) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="/p/pdf-tools.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">Edit PDF Metadata</h1>
+    <p class="tool-subtitle">
+      Inspect, edit, or strip document Title, Author, Subject, Keywords, Creator, and Producer properties.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select PDF file">
+      <div
+        id="meta-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop a PDF file here or click to select a file"
+      >
+        <h2 class="dropzone-title">Drop a PDF file here, or click to select</h2>
+        <p class="dropzone-hint">Accepts a single .pdf file.</p>
+        <span class="dropzone-btn">Select PDF File</span>
+        <input
+          type="file"
+          id="meta-file-input"
+          class="sr-only-input"
+          accept=".pdf,application/pdf"
+        />
+      </div>
+    </section>
+
+    <div id="meta-status" class="status-banner info" hidden></div>
+
+    <section id="meta-config-panel" class="tool-panel" hidden aria-label="PDF metadata fields">
+      <div class="file-list-header" style="margin-bottom: 16px;">
+        <div class="file-item" style="width: 100%;">
+          <div class="file-item-info">
+            <div class="file-item-details">
+              <div id="meta-file-name" class="file-item-name">document.pdf</div>
+              <div id="meta-file-meta" class="file-item-meta">0 KB • 0 pages</div>
+            </div>
+          </div>
+          <div class="file-item-actions">
+            <button type="button" id="meta-wipe-btn" class="danger-btn">Clear All Fields</button>
+            <button type="button" id="meta-change-file-btn" class="secondary-btn">Change File</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="meta-title" class="form-label">Title</label>
+          <input type="text" id="meta-title" class="form-input" placeholder="Document title" />
+        </div>
+
+        <div class="form-group">
+          <label for="meta-author" class="form-label">Author</label>
+          <input type="text" id="meta-author" class="form-input" placeholder="Author name" />
+        </div>
+
+        <div class="form-group">
+          <label for="meta-subject" class="form-label">Subject</label>
+          <input type="text" id="meta-subject" class="form-input" placeholder="Document subject or summary" />
+        </div>
+
+        <div class="form-group">
+          <label for="meta-keywords" class="form-label">Keywords (Comma-Separated)</label>
+          <input type="text" id="meta-keywords" class="form-input" placeholder="report, finance, 2026" />
+        </div>
+
+        <div class="form-group">
+          <label for="meta-creator" class="form-label">Creator Application</label>
+          <input type="text" id="meta-creator" class="form-input" placeholder="Creator application" />
+        </div>
+
+        <div class="form-group">
+          <label for="meta-producer" class="form-label">PDF Producer</label>
+          <input type="text" id="meta-producer" class="form-input" placeholder="PDF producer" />
+        </div>
+      </div>
+
+      <div class="action-bar" style="margin-top: 20px;">
+        <button type="button" id="meta-submit-btn" class="primary-btn">
+          <span>Save Metadata</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/utils.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/metadata-pdf/metadata-pdf.js"></script>

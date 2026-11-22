@@ -1,0 +1,100 @@
+<!-- Blogger Page Permalink Slug: nup-pdf (/p/nup-pdf.html) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="/p/pdf-tools.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">N-Up PDF Handout Grid (2-Up / 4-Up / 6-Up)</h1>
+    <p class="tool-subtitle">
+      Combine 2, 4, or 6 pages onto each sheet for compact lecture slide handouts and booklet printing.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select PDF file">
+      <div
+        id="nup-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop a PDF file here or click to select a file"
+      >
+        <h2 class="dropzone-title">Drop a PDF file here, or click to select</h2>
+        <p class="dropzone-hint">Accepts a single .pdf file (preserves vector sharpness).</p>
+        <span class="dropzone-btn">Select PDF File</span>
+        <input
+          type="file"
+          id="nup-file-input"
+          class="sr-only-input"
+          accept=".pdf,application/pdf"
+        />
+      </div>
+    </section>
+
+    <div id="nup-status" class="status-banner info" hidden></div>
+
+    <section id="nup-config-panel" class="tool-panel" hidden aria-label="N-Up layout settings">
+      <div class="file-list-header" style="margin-bottom: 16px;">
+        <div class="file-item" style="width: 100%;">
+          <div class="file-item-info">
+            <div class="file-item-details">
+              <div id="nup-file-name" class="file-item-name">document.pdf</div>
+              <div id="nup-file-meta" class="file-item-meta">0 KB • 0 pages</div>
+            </div>
+          </div>
+          <div class="file-item-actions">
+            <button type="button" id="nup-change-file-btn" class="secondary-btn">Change File</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nup-grid-type" class="form-label">Pages per Sheet</label>
+          <select id="nup-grid-type" class="form-select">
+            <option value="2">2-Up (2 Pages per Sheet)</option>
+            <option value="4" selected>4-Up (2 × 2 Grid — 4 Pages per Sheet)</option>
+            <option value="6">6-Up (3 × 2 Grid — 6 Pages per Sheet)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="nup-sheet-size" class="form-label">Output Sheet Size</label>
+          <select id="nup-sheet-size" class="form-select">
+            <option value="a4" selected>A4 (210 × 297 mm)</option>
+            <option value="letter">US Letter (8.5 × 11 in)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="nup-orientation" class="form-label">Sheet Orientation</label>
+          <select id="nup-orientation" class="form-select">
+            <option value="landscape" selected>Landscape</option>
+            <option value="portrait">Portrait</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="nup-border" class="form-label">Slide / Page Frame Border</label>
+          <select id="nup-border" class="form-select">
+            <option value="yes" selected>Draw Thin Frame Border</option>
+            <option value="no">No Frame Border</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="action-bar" style="margin-top: 20px;">
+        <button type="button" id="nup-submit-btn" class="primary-btn">
+          <span>Generate N-Up PDF</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/shared/utils.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Ade3b16/pdf-tools@v1.0.0/nup-pdf/nup-pdf.js"></script>
