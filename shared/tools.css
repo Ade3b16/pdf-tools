@@ -6,56 +6,39 @@
    ========================================================================== */
 
 /* ==========================================================================
-   Blogger Full-Screen Reset (Automatically strips Blogger's outer blog frame,
-   post titles, comments, and margins whenever #pdf-tool-app is on the page)
+   Blogger Full-Screen Viewport Takeover
+   Forces #pdf-tool-app to break out of ANY Blogger theme container (including
+   custom third-party themes) and occupy 100% of the browser window.
    ========================================================================== */
+html:has(#pdf-tool-app),
 body:has(#pdf-tool-app) {
   margin: 0 !important;
   padding: 0 !important;
-  background-color: #f3f4f6 !important;
-  overflow-x: hidden;
-}
-
-body:has(#pdf-tool-app) .sidebar-container,
-body:has(#pdf-tool-app) .post-title,
-body:has(#pdf-tool-app) .post-header,
-body:has(#pdf-tool-app) .post-footer,
-body:has(#pdf-tool-app) .comments,
-body:has(#pdf-tool-app) #comments,
-body:has(#pdf-tool-app) .blog-pager,
-body:has(#pdf-tool-app) .Attribution,
-body:has(#pdf-tool-app) .header-widget,
-body:has(#pdf-tool-app) #header,
-body:has(#pdf-tool-app) .bg-photo-container,
-body:has(#pdf-tool-app) .bg-photo-overlay,
-body:has(#pdf-tool-app) .centered-top-container,
-body:has(#pdf-tool-app) .centered-top {
-  display: none !important;
-}
-
-body:has(#pdf-tool-app) .page,
-body:has(#pdf-tool-app) .page_body,
-body:has(#pdf-tool-app) .centered,
-body:has(#pdf-tool-app) .centered-bottom,
-body:has(#pdf-tool-app) .main-container,
-body:has(#pdf-tool-app) .main,
-body:has(#pdf-tool-app) .widget,
-body:has(#pdf-tool-app) .Blog,
-body:has(#pdf-tool-app) .post-outer-container,
-body:has(#pdf-tool-app) .post-outer,
-body:has(#pdf-tool-app) .post,
-body:has(#pdf-tool-app) .post-body,
-body:has(#pdf-tool-app) .post-body-container {
-  margin: 0 !important;
-  padding: 0 !important;
-  max-width: 100% !important;
+  overflow: hidden !important;
   width: 100% !important;
-  border: none !important;
-  box-shadow: none !important;
-  background: transparent !important;
+  height: 100% !important;
+}
+
+body:has(#pdf-tool-app) *:has(#pdf-tool-app) {
+  transform: none !important;
+  filter: none !important;
+  perspective: none !important;
+  contain: none !important;
+  backdrop-filter: none !important;
 }
 
 #pdf-tool-app {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  z-index: 2147483647 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
   /* Core Surfaces & Typography */
   --bg-canvas: #f3f4f6;
   --surface: #ffffff;
