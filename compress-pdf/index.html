@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compress PDF — Local Browser PDF Utility</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fafafa;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= BLOGGER PASTE START ================= -->
+<link rel="stylesheet" href="../shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="../index.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">Compress PDF</h1>
+    <p class="tool-subtitle">
+      Re-encode PDF pages at selectable resolution and JPEG quality levels to reduce file size.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select PDF file">
+      <div
+        id="comp-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop a PDF file here or click to select a file"
+      >
+        <h2 class="dropzone-title">Drop a PDF file here, or click to select</h2>
+        <p class="dropzone-hint">Accepts a single .pdf file.</p>
+        <span class="dropzone-btn">Select PDF File</span>
+        <input
+          type="file"
+          id="comp-file-input"
+          class="sr-only-input"
+          accept=".pdf,application/pdf"
+        />
+      </div>
+    </section>
+
+    <div id="comp-status" class="status-banner info" hidden></div>
+
+    <section id="comp-config-panel" class="tool-panel" hidden aria-label="Compression settings">
+      <div class="file-list-header" style="margin-bottom: 16px;">
+        <div class="file-item" style="width: 100%;">
+          <div class="file-item-info">
+            <div class="file-item-details">
+              <div id="comp-file-name" class="file-item-name">document.pdf</div>
+              <div id="comp-file-meta" class="file-item-meta">0 KB • 0 pages</div>
+            </div>
+          </div>
+          <div class="file-item-actions">
+            <button type="button" id="comp-change-file-btn" class="secondary-btn">Change File</button>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Compression Preset</h2>
+      <div class="options-grid" role="radiogroup" aria-label="Compression level">
+        <label class="option-card" data-preset-card="extreme">
+          <input type="radio" name="comp-preset" value="extreme" />
+          <div>
+            <div class="option-card-title">High Compression</div>
+            <div class="option-card-desc">100 DPI, 50% JPEG quality.</div>
+          </div>
+        </label>
+
+        <label class="option-card selected" data-preset-card="recommended">
+          <input type="radio" name="comp-preset" value="recommended" checked />
+          <div>
+            <div class="option-card-title">Balanced</div>
+            <div class="option-card-desc">135 DPI, 70% JPEG quality.</div>
+          </div>
+        </label>
+
+        <label class="option-card" data-preset-card="high">
+          <input type="radio" name="comp-preset" value="high" />
+          <div>
+            <div class="option-card-title">High Visual Quality</div>
+            <div class="option-card-desc">175 DPI, 85% JPEG quality.</div>
+          </div>
+        </label>
+      </div>
+
+      <div class="form-grid" style="margin-top: 16px;">
+        <div class="form-group">
+          <label for="comp-quality" class="form-label">JPEG Quality</label>
+          <div class="range-slider-row">
+            <input type="range" id="comp-quality" min="25" max="95" step="5" value="70" />
+            <span id="comp-quality-badge" class="range-value-badge">70%</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="comp-scale" class="form-label">Resolution Scale</label>
+          <div class="range-slider-row">
+            <input type="range" id="comp-scale" min="0.8" max="2.2" step="0.1" value="1.4" />
+            <span id="comp-scale-badge" class="range-value-badge">1.4×</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="comp-stats-box" class="stats-box" style="margin-top: 16px;" hidden>
+        <div class="stat-item">
+          <span class="stat-label">Original:</span>
+          <span id="comp-stat-original" class="stat-value">0 KB</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Compressed:</span>
+          <span id="comp-stat-new" class="stat-value">0 KB</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Difference:</span>
+          <span id="comp-stat-saving" class="stat-value">0%</span>
+        </div>
+      </div>
+
+      <div class="action-bar" style="margin-top: 16px;">
+        <button type="button" id="comp-submit-btn" class="primary-btn">
+          <span>Compress PDF</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="../shared/utils.js"></script>
+<script src="./compress-pdf.js"></script>
+<!-- ================= BLOGGER PASTE END ================= -->
+
+</body>
+</html>

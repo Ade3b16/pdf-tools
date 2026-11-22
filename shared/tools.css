@@ -1,0 +1,1356 @@
+/* ==========================================================================
+   PDF Tools Suite — Shared Scoped Stylesheet (shared/tools.css)
+   100% of selectors are strictly scoped under #pdf-tool-app.
+   Full-viewport application layout (260px dark sidebar + full-bleed stage)
+   with crisp vector iconography, tactile controls, and semantic color accents.
+   ========================================================================== */
+
+#pdf-tool-app {
+  /* Core Surfaces & Typography */
+  --bg-canvas: #f3f4f6;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
+  --surface-hover: #f1f5f9;
+  --sidebar-bg: #111318;
+  --sidebar-surface: #1a1d24;
+  --sidebar-border: #262a34;
+  --sidebar-text: #94a3b8;
+  --sidebar-text-active: #ffffff;
+
+  /* Brand & Accents */
+  --primary: #e11d48;
+  --primary-hover: #be123c;
+  --primary-subtle: #fff1f2;
+  --primary-border: #fecdd3;
+  --ring: #e11d48;
+
+  /* Category Accent Tokens */
+  --cat-organize-fg: #4f46e5;
+  --cat-organize-bg: #eef2ff;
+  --cat-organize-border: #c7d2fe;
+
+  --cat-edit-fg: #e11d48;
+  --cat-edit-bg: #fff1f2;
+  --cat-edit-border: #fecdd3;
+
+  --cat-topdf-fg: #059669;
+  --cat-topdf-bg: #ecfdf5;
+  --cat-topdf-border: #a7f3d0;
+
+  --cat-frompdf-fg: #d97706;
+  --cat-frompdf-bg: #fffbeb;
+  --cat-frompdf-border: #fde68a;
+
+  --cat-optimize-fg: #0d9488;
+  --cat-optimize-bg: #f0fdfa;
+  --cat-optimize-border: #99f6e4;
+
+  /* Text & Borders */
+  --text: #0f172a;
+  --text-muted: #475569;
+  --text-subtle: #64748b;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  /* Status Tokens */
+  --success-bg: #f0fdf4;
+  --success-border: #bbf7d0;
+  --success-text: #15803d;
+  --warning-bg: #fffbeb;
+  --warning-border: #fde68a;
+  --warning-text: #b45309;
+  --error-bg: #fef2f2;
+  --error-border: #fecaca;
+  --error-text: #b91c1c;
+  --info-bg: #f8fafc;
+  --info-border: #cbd5e1;
+  --info-text: #1e293b;
+
+  /* Legacy alias mappings for tool scripts */
+  --pdf-primary: var(--primary);
+  --pdf-border: var(--border);
+  --pdf-border-strong: var(--border-strong);
+  --pdf-surface: var(--surface);
+  --pdf-surface-alt: var(--surface-muted);
+  --pdf-bg: var(--bg-canvas);
+  --pdf-text: var(--text);
+  --pdf-text-muted: var(--text-muted);
+  --pdf-text-light: var(--text-subtle);
+  --pdf-success-text: var(--success-text);
+  --pdf-warning-text: var(--warning-text);
+  --pdf-radius-sm: 4px;
+  --pdf-radius-md: 6px;
+  --pdf-radius-lg: 8px;
+
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  color: var(--text);
+  background-color: var(--bg-canvas);
+  line-height: 1.5;
+  font-size: 14px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+#pdf-tool-app *,
+#pdf-tool-app *::before,
+#pdf-tool-app *::after {
+  box-sizing: border-box;
+}
+
+#pdf-tool-app h1,
+#pdf-tool-app h2,
+#pdf-tool-app h3,
+#pdf-tool-app h4,
+#pdf-tool-app p,
+#pdf-tool-app ul,
+#pdf-tool-app ol,
+#pdf-tool-app li,
+#pdf-tool-app figure {
+  margin: 0;
+  padding: 0;
+}
+
+#pdf-tool-app ul,
+#pdf-tool-app ol {
+  list-style: none;
+}
+
+#pdf-tool-app a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#pdf-tool-app button,
+#pdf-tool-app input,
+#pdf-tool-app select,
+#pdf-tool-app textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+}
+
+#pdf-tool-app button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+#pdf-tool-app img,
+#pdf-tool-app canvas,
+#pdf-tool-app svg {
+  display: block;
+  max-width: 100%;
+}
+
+#pdf-tool-app [hidden] {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Full-Screen App Shell Layout (Frontpage Hub: Fixed 260px Sidebar + Main)
+   ========================================================================== */
+#pdf-tool-app .app-shell {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Left Sidebar */
+#pdf-tool-app .app-sidebar {
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  border-right: 1px solid var(--sidebar-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 16px;
+  user-select: none;
+}
+
+#pdf-tool-app .brand-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 8px 20px;
+  border-bottom: 1px solid var(--sidebar-border);
+  margin-bottom: 20px;
+}
+
+#pdf-tool-app .brand-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background-color: var(--primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+}
+
+#pdf-tool-app .brand-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+#pdf-tool-app .brand-sub {
+  font-size: 11px;
+  color: var(--sidebar-text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+#pdf-tool-app .sidebar-group-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  padding: 0 10px;
+  margin-bottom: 8px;
+}
+
+/* Vertical Category Navigation inside Sidebar */
+#pdf-tool-app .category-pills {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+#pdf-tool-app .category-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--sidebar-text);
+  background: transparent;
+  border: 1px solid transparent;
+  text-align: left;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+#pdf-tool-app .category-pill-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#pdf-tool-app .category-pill svg {
+  width: 16px;
+  height: 16px;
+  opacity: 0.75;
+  flex-shrink: 0;
+}
+
+#pdf-tool-app .category-pill:hover {
+  background-color: var(--sidebar-surface);
+  color: #e2e8f0;
+}
+
+#pdf-tool-app .category-pill.active {
+  background-color: var(--sidebar-surface);
+  color: var(--sidebar-text-active);
+  border-color: var(--sidebar-border);
+}
+
+#pdf-tool-app .category-pill.active svg {
+  opacity: 1;
+  color: var(--primary);
+}
+
+#pdf-tool-app .category-pill-count {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: var(--sidebar-text);
+}
+
+#pdf-tool-app .category-pill.active .category-pill-count {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+/* Sidebar Status Filter */
+#pdf-tool-app .status-filter-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: var(--sidebar-surface);
+  border: 1px solid var(--sidebar-border);
+  padding: 3px;
+  border-radius: 6px;
+  gap: 2px;
+}
+
+#pdf-tool-app .status-filter-btn {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--sidebar-text);
+  height: 28px;
+  border-radius: 4px;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+#pdf-tool-app .status-filter-btn:hover {
+  color: #ffffff;
+}
+
+#pdf-tool-app .status-filter-btn.active {
+  background-color: #262a34;
+  color: #ffffff;
+}
+
+#pdf-tool-app .sidebar-footer {
+  padding-top: 16px;
+  border-top: 1px solid var(--sidebar-border);
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.45;
+}
+
+#pdf-tool-app .engine-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cbd5e1;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+#pdf-tool-app .engine-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10b981;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Right Main Workspace Area (Frontpage Hub)
+   ========================================================================== */
+#pdf-tool-app .app-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-color: var(--bg-canvas);
+}
+
+/* Sticky Top Command Bar */
+#pdf-tool-app .app-topbar {
+  height: 64px;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#pdf-tool-app .search-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 540px;
+  display: flex;
+  align-items: center;
+}
+
+#pdf-tool-app .search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--text-subtle);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+#pdf-tool-app .search-input {
+  width: 100%;
+  height: 38px;
+  padding: 6px 64px 6px 36px;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--surface-muted);
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+#pdf-tool-app .search-input:focus {
+  outline: 2px solid var(--ring);
+  outline-offset: -1px;
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+#pdf-tool-app .kbd-hint {
+  position: absolute;
+  right: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: var(--text-subtle);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  padding: 1px 6px;
+  pointer-events: none;
+}
+
+#pdf-tool-app .search-clear-btn {
+  position: absolute;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-subtle);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 12px;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+#pdf-tool-app .search-clear-btn:hover {
+  color: var(--text);
+  background: var(--surface-hover);
+}
+
+#pdf-tool-app .topbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+#pdf-tool-app .topbar-counter {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* Main Stage Content Container */
+#pdf-tool-app .app-content {
+  flex: 1;
+  padding: 28px 32px 40px;
+}
+
+#pdf-tool-app .stage-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+#pdf-tool-app .hub-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+#pdf-tool-app .hub-results-summary {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Full-Width Tool Directory Grid & Cards
+   ========================================================================== */
+#pdf-tool-app .tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 16px;
+}
+
+#pdf-tool-app .tool-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  min-height: 184px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+#pdf-tool-app .tool-card:hover {
+  border-color: var(--text-subtle);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.07);
+}
+
+#pdf-tool-app .tool-card.is-planned {
+  background: var(--surface-muted);
+  border-style: dashed;
+}
+
+#pdf-tool-app .tool-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+/* Semantic Category Icon Box (36x36, 8px radius, crisp vector SVG) */
+#pdf-tool-app .tool-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cat-organize-bg);
+  color: var(--cat-organize-fg);
+  border: 1px solid var(--cat-organize-border);
+  flex-shrink: 0;
+}
+
+#pdf-tool-app .tool-icon-box svg {
+  width: 20px;
+  height: 20px;
+}
+
+#pdf-tool-app .tool-card[data-category="edit"] .tool-icon-box {
+  background: var(--cat-edit-bg);
+  color: var(--cat-edit-fg);
+  border-color: var(--cat-edit-border);
+}
+
+#pdf-tool-app .tool-card[data-category="convert-to-pdf"] .tool-icon-box {
+  background: var(--cat-topdf-bg);
+  color: var(--cat-topdf-fg);
+  border-color: var(--cat-topdf-border);
+}
+
+#pdf-tool-app .tool-card[data-category="convert-from-pdf"] .tool-icon-box {
+  background: var(--cat-frompdf-bg);
+  color: var(--cat-frompdf-fg);
+  border-color: var(--cat-frompdf-border);
+}
+
+#pdf-tool-app .tool-card[data-category="optimize"] .tool-icon-box {
+  background: var(--cat-optimize-bg);
+  color: var(--cat-optimize-fg);
+  border-color: var(--cat-optimize-border);
+}
+
+#pdf-tool-app .tool-card.is-planned .tool-icon-box {
+  background: var(--surface);
+  color: var(--text-subtle);
+  border-color: var(--border);
+}
+
+#pdf-tool-app .tool-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#pdf-tool-app .io-badge {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+#pdf-tool-app .status-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+#pdf-tool-app .status-badge.active {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+}
+
+#pdf-tool-app .status-badge.planned {
+  background: var(--surface);
+  color: var(--text-subtle);
+  border: 1px solid var(--border);
+}
+
+#pdf-tool-app .tool-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+#pdf-tool-app .tool-card-desc {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+#pdf-tool-app .tool-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-subtle);
+}
+
+#pdf-tool-app .tool-card-cta {
+  color: var(--text);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 150ms ease;
+}
+
+#pdf-tool-app .tool-card:hover .tool-card-cta {
+  color: var(--primary);
+}
+
+#pdf-tool-app .tool-card.is-planned .tool-card-cta {
+  color: var(--text-subtle);
+  font-weight: 500;
+}
+
+#pdf-tool-app .hub-empty-state {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 32px;
+  margin-top: 16px;
+}
+
+#pdf-tool-app .hub-empty-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+#pdf-tool-app .hub-empty-desc {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* ==========================================================================
+   Individual Tool Pages: Full-Screen Header + Edge-to-Edge Workspace
+   ========================================================================== */
+#pdf-tool-app .pdf-tool-nav {
+  background-color: var(--sidebar-bg);
+  color: #ffffff;
+  height: 56px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--sidebar-border);
+}
+
+#pdf-tool-app .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #e2e8f0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--sidebar-surface);
+  border: 1px solid var(--sidebar-border);
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+#pdf-tool-app .back-link:hover {
+  background: #262a34;
+  color: #ffffff;
+}
+
+#pdf-tool-app .tool-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 32px;
+}
+
+#pdf-tool-app .tool-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+#pdf-tool-app .tool-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+#pdf-tool-app .tool-workspace {
+  flex: 1;
+  width: 100%;
+  padding: 28px 32px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#pdf-tool-app .tool-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+#pdf-tool-app .section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   Tactile File Dropzone
+   ========================================================================== */
+#pdf-tool-app .dropzone {
+  position: relative;
+  border: 2px dashed var(--border-strong);
+  border-radius: 8px;
+  background: var(--surface-muted);
+  padding: 48px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease;
+  user-select: none;
+}
+
+#pdf-tool-app .dropzone:hover,
+#pdf-tool-app .dropzone:focus-visible,
+#pdf-tool-app .dropzone.dragover {
+  border-color: var(--primary);
+  background: var(--primary-subtle);
+  outline: none;
+}
+
+#pdf-tool-app .dropzone-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+#pdf-tool-app .dropzone-hint {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+#pdf-tool-app .dropzone-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 13.5px;
+  height: 38px;
+  padding: 0 18px;
+  border-radius: 6px;
+  transition: background-color 150ms ease;
+}
+
+#pdf-tool-app .dropzone:hover .dropzone-btn {
+  background: var(--primary-hover);
+}
+
+#pdf-tool-app .sr-only-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   Reorderable File List
+   ========================================================================== */
+#pdf-tool-app .file-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+#pdf-tool-app .file-count-badge {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+#pdf-tool-app .file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#pdf-tool-app .file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+#pdf-tool-app .file-item-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+#pdf-tool-app .file-item-index {
+  min-width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+#pdf-tool-app .file-item-details {
+  min-width: 0;
+  flex: 1;
+}
+
+#pdf-tool-app .file-item-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#pdf-tool-app .file-item-meta {
+  font-size: 12px;
+  color: var(--text-subtle);
+}
+
+#pdf-tool-app .file-item-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+#pdf-tool-app .icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+#pdf-tool-app .icon-btn:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--text-subtle);
+  background: var(--surface-hover);
+}
+
+#pdf-tool-app .icon-btn.danger:hover:not(:disabled) {
+  color: var(--error-text);
+  border-color: var(--error-border);
+  background: var(--error-bg);
+}
+
+#pdf-tool-app .icon-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Radio Options, Forms & Tabs
+   ========================================================================== */
+#pdf-tool-app .options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+#pdf-tool-app .option-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface-muted);
+  cursor: pointer;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+#pdf-tool-app .option-card:hover {
+  border-color: var(--border-strong);
+}
+
+#pdf-tool-app .option-card.selected {
+  border-color: var(--primary);
+  background: var(--primary-subtle);
+}
+
+#pdf-tool-app .option-card input[type="radio"] {
+  accent-color: var(--primary);
+  margin-top: 3px;
+}
+
+#pdf-tool-app .option-card-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+#pdf-tool-app .option-card-desc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+#pdf-tool-app .form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+#pdf-tool-app .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#pdf-tool-app .form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+#pdf-tool-app .form-input,
+#pdf-tool-app .form-select,
+#pdf-tool-app .form-textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 150ms ease;
+}
+
+#pdf-tool-app .form-input,
+#pdf-tool-app .form-select {
+  height: 38px;
+}
+
+#pdf-tool-app .form-input:focus,
+#pdf-tool-app .form-select:focus,
+#pdf-tool-app .form-textarea:focus {
+  outline: 2px solid var(--ring);
+  outline-offset: -1px;
+  border-color: var(--primary);
+}
+
+#pdf-tool-app .form-hint {
+  font-size: 12px;
+  color: var(--text-subtle);
+}
+
+#pdf-tool-app .range-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 38px;
+}
+
+#pdf-tool-app .range-slider-row input[type="range"] {
+  flex: 1;
+  accent-color: var(--primary);
+}
+
+#pdf-tool-app .range-value-badge {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 48px;
+  text-align: center;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+}
+
+/* Underline Tabs */
+#pdf-tool-app .toggle-tabs {
+  display: inline-flex;
+  border-bottom: 1px solid var(--border);
+  gap: 20px;
+}
+
+#pdf-tool-app .toggle-tab {
+  padding: 8px 4px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+
+#pdf-tool-app .toggle-tab:hover {
+  color: var(--text);
+}
+
+#pdf-tool-app .toggle-tab.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Thumbnail Grid & Signature Canvas
+   ========================================================================== */
+#pdf-tool-app .thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+#pdf-tool-app .thumbnail-card {
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+#pdf-tool-app .thumbnail-canvas-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1.38;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#pdf-tool-app .thumbnail-canvas-wrap canvas,
+#pdf-tool-app .thumbnail-canvas-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+#pdf-tool-app .thumbnail-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+#pdf-tool-app .thumbnail-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+}
+
+#pdf-tool-app .signature-pad-wrap {
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  background: #ffffff;
+  overflow: hidden;
+  touch-action: none;
+}
+
+/* ==========================================================================
+   Action Buttons
+   ========================================================================== */
+#pdf-tool-app .action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#pdf-tool-app .primary-btn,
+#pdf-tool-app .secondary-btn,
+#pdf-tool-app .danger-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 6px;
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+#pdf-tool-app .primary-btn {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+#pdf-tool-app .primary-btn:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+#pdf-tool-app .secondary-btn {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+}
+
+#pdf-tool-app .secondary-btn:hover:not(:disabled) {
+  background: var(--surface-hover);
+}
+
+#pdf-tool-app .danger-btn {
+  background: var(--error-bg);
+  color: var(--error-text);
+  border: 1px solid var(--error-border);
+}
+
+#pdf-tool-app .danger-btn:hover:not(:disabled) {
+  background: #fee2e2;
+}
+
+#pdf-tool-app .primary-btn:disabled,
+#pdf-tool-app .secondary-btn:disabled,
+#pdf-tool-app .danger-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#pdf-tool-app .spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: pdf-tool-spin 0.7s linear infinite;
+}
+
+@keyframes pdf-tool-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   Status Banners & Inline Readout
+   ========================================================================== */
+#pdf-tool-app .status-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+#pdf-tool-app .status-banner.info,
+#pdf-tool-app .status-banner.loading {
+  background: var(--info-bg);
+  border-color: var(--info-border);
+  color: var(--info-text);
+}
+
+#pdf-tool-app .status-banner.success {
+  background: var(--success-bg);
+  border-color: var(--success-border);
+  color: var(--success-text);
+}
+
+#pdf-tool-app .status-banner.warning {
+  background: var(--warning-bg);
+  border-color: var(--warning-border);
+  color: var(--warning-text);
+}
+
+#pdf-tool-app .status-banner.error {
+  background: var(--error-bg);
+  border-color: var(--error-border);
+  color: var(--error-text);
+}
+
+#pdf-tool-app .stats-box {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 12px 16px;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13.5px;
+}
+
+#pdf-tool-app .stat-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+#pdf-tool-app .stat-label {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+#pdf-tool-app .stat-value {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+@media (max-width: 900px) {
+  #pdf-tool-app .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  #pdf-tool-app .app-sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--sidebar-border);
+    padding: 16px;
+  }
+
+  #pdf-tool-app .category-pills {
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  #pdf-tool-app .category-pill {
+    width: auto;
+    gap: 8px;
+  }
+
+  #pdf-tool-app .sidebar-footer {
+    display: none;
+  }
+
+  #pdf-tool-app .app-topbar,
+  #pdf-tool-app .app-content,
+  #pdf-tool-app .pdf-tool-nav,
+  #pdf-tool-app .tool-header,
+  #pdf-tool-app .tool-workspace {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  #pdf-tool-app .app-topbar {
+    height: auto;
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #pdf-tool-app .search-wrapper {
+    max-width: none;
+  }
+
+  #pdf-tool-app .action-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #pdf-tool-app .primary-btn,
+  #pdf-tool-app .secondary-btn,
+  #pdf-tool-app .danger-btn {
+    width: 100%;
+  }
+}

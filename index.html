@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF Studio — Local Browser PDF &amp; File Suite</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= BLOGGER PASTE START ================= -->
+<link rel="stylesheet" href="./shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <div class="app-shell">
+    <!-- Fixed 260px Left Sidebar -->
+    <aside class="app-sidebar" aria-label="PDF workspace navigation">
+      <div>
+        <div class="brand-header">
+          <div class="brand-mark" aria-hidden="true">PDF</div>
+          <div>
+            <div class="brand-name">PDF Studio</div>
+            <div class="brand-sub">LOCAL ENGINE v1.0</div>
+          </div>
+        </div>
+
+        <div class="sidebar-group-label">Categories</div>
+        <nav class="category-pills" id="hub-category-pills" role="tablist" aria-label="Tool categories">
+          <button type="button" class="category-pill active" data-category="all">
+            <span class="category-pill-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+              <span>All Tools</span>
+            </span>
+            <span class="category-pill-count" data-count-for="all">14</span>
+          </button>
+
+          <button type="button" class="category-pill" data-category="organize">
+            <span class="category-pill-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span>Organize &amp; Pages</span>
+            </span>
+            <span class="category-pill-count" data-count-for="organize">4</span>
+          </button>
+
+          <button type="button" class="category-pill" data-category="edit">
+            <span class="category-pill-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              <span>Edit &amp; Sign</span>
+            </span>
+            <span class="category-pill-count" data-count-for="edit">2</span>
+          </button>
+
+          <button type="button" class="category-pill" data-category="convert-to-pdf">
+            <span class="category-pill-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <span>Convert to PDF</span>
+            </span>
+            <span class="category-pill-count" data-count-for="convert-to-pdf">1</span>
+          </button>
+
+          <button type="button" class="category-pill" data-category="convert-from-pdf">
+            <span class="category-pill-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Export &amp; Extract</span>
+            </span>
+            <span class="category-pill-count" data-count-for="convert-from-pdf">2</span>
+          </button>
+
+          <button type="button" class="category-pill" data-category="optimize">
+            <span class="category-pill-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+              <span>Optimize Size</span>
+            </span>
+            <span class="category-pill-count" data-count-for="optimize">2</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-group-label">Status Filter</div>
+        <div class="status-filter-group" role="group" aria-label="Filter by availability status">
+          <button type="button" class="status-filter-btn active" data-status-filter="all">All</button>
+          <button type="button" class="status-filter-btn" data-status-filter="active">Active</button>
+          <button type="button" class="status-filter-btn" data-status-filter="planned">Planned</button>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="engine-indicator">
+          <span class="engine-dot" aria-hidden="true"></span>
+          <span>Client-Side Engine Ready</span>
+        </div>
+        <p>All document processing executes locally in browser memory. Zero external uploads.</p>
+      </div>
+    </aside>
+
+    <!-- Main Full-Width Workspace -->
+    <div class="app-main">
+      <!-- Top Command Bar -->
+      <header class="app-topbar">
+        <div class="search-wrapper">
+          <span class="search-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input
+            type="search"
+            id="hub-search-input"
+            class="search-input"
+            placeholder="Filter tools by name, action, or file format (merge, split, jpg, sign, compress)..."
+            aria-label="Filter PDF tools"
+            autocomplete="off"
+          />
+          <kbd id="hub-kbd-hint" class="kbd-hint" aria-hidden="true">/</kbd>
+          <button
+            type="button"
+            id="hub-search-clear"
+            class="search-clear-btn"
+            aria-label="Clear search"
+            hidden
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="topbar-meta">
+          <span id="hub-active-counter" class="topbar-counter">10 Active • 4 Planned</span>
+        </div>
+      </header>
+
+      <!-- Workspace Stage -->
+      <div class="app-content">
+        <div class="stage-header">
+          <h1 class="hub-title">Document &amp; PDF Utilities</h1>
+          <span id="hub-results-summary" class="hub-results-summary">Showing all 14 tools</span>
+        </div>
+
+        <!-- Tool Directory Grid -->
+        <main class="tools-grid" id="hub-tools-grid" aria-live="polite">
+          <!-- 1. Merge PDF -->
+          <a
+            href="./merge-pdf/index.html"
+            class="tool-card"
+            data-tool-id="merge-pdf"
+            data-category="organize"
+            data-status="active"
+            data-keywords="merge combine join multiple pdfs concatenate"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13"/><path d="M8 12h13"/><path d="M8 18h13"/><path d="M3 6h.01"/><path d="M3 12h.01"/><path d="M3 18h.01"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Merge PDF</h2>
+              <p class="tool-card-desc">
+                Combine multiple PDF documents into a single file in your chosen page sequence.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Organize &amp; Pages</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 2. Split PDF -->
+          <a
+            href="./split-pdf/index.html"
+            class="tool-card"
+            data-tool-id="split-pdf"
+            data-category="organize"
+            data-status="active"
+            data-keywords="split extract separate pages custom range burst zip"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → ZIP</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Split PDF</h2>
+              <p class="tool-card-desc">
+                Extract specific page ranges into a new PDF or split every page into a ZIP archive.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Organize &amp; Pages</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 3. Rotate PDF -->
+          <a
+            href="./rotate-pdf/index.html"
+            class="tool-card"
+            data-tool-id="rotate-pdf"
+            data-category="organize"
+            data-status="active"
+            data-keywords="rotate turn orientation 90 180 flip landscape portrait pages"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Rotate PDF</h2>
+              <p class="tool-card-desc">
+                Rotate all pages or custom ranges 90° clockwise, 90° counter-clockwise, or 180°.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Organize &amp; Pages</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 4. Page Numbers & Watermark -->
+          <a
+            href="./watermark-pdf/index.html"
+            class="tool-card"
+            data-tool-id="watermark-pdf"
+            data-category="edit"
+            data-status="active"
+            data-keywords="watermark stamp page numbers pagination footer header diagonal"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="13" y2="12"/><line x1="15" y1="16" x2="17" y2="16"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Page Numbers &amp; Watermark</h2>
+              <p class="tool-card-desc">
+                Stamp formatted page numbering or custom diagonal and centered text watermarks.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Edit &amp; Sign</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 5. Image to PDF -->
+          <a
+            href="./image-to-pdf/index.html"
+            class="tool-card"
+            data-tool-id="image-to-pdf"
+            data-category="convert-to-pdf"
+            data-status="active"
+            data-keywords="jpg png webp image photos pictures to pdf convert a4"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">IMG → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">JPG / PNG / WebP to PDF</h2>
+              <p class="tool-card-desc">
+                Compile multiple images into a single PDF with full-bleed fit or A4 / Letter margins.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Convert to PDF</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 6. PDF to JPG / PNG -->
+          <a
+            href="./pdf-to-jpg/index.html"
+            class="tool-card"
+            data-tool-id="pdf-to-jpg"
+            data-category="convert-from-pdf"
+            data-status="active"
+            data-keywords="pdf to jpg jpeg png images export render pictures zip"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → IMG</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">PDF to JPG / PNG</h2>
+              <p class="tool-card-desc">
+                Render PDF pages into high-resolution JPG or PNG image files up to 220 DPI.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Export &amp; Extract</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 7. Sign PDF -->
+          <a
+            href="./sign-pdf/index.html"
+            class="tool-card"
+            data-tool-id="sign-pdf"
+            data-category="edit"
+            data-status="active"
+            data-keywords="sign signature draw ink pad stamp e-sign"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Sign PDF</h2>
+              <p class="tool-card-desc">
+                Draw a signature or upload a PNG signature, click the page preview to position it, and stamp.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Edit &amp; Sign</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 8. Organize PDF -->
+          <a
+            href="./organize-pdf/index.html"
+            class="tool-card"
+            data-tool-id="organize-pdf"
+            data-category="organize"
+            data-status="active"
+            data-keywords="organize rearrange reorder delete duplicate page thumbnails grid"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="9" rx="1"/><rect x="14" y="15" width="7" height="6" rx="1"/><rect x="3" y="15" width="7" height="6" rx="1"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Organize PDF Pages</h2>
+              <p class="tool-card-desc">
+                Inspect visual page thumbnails to reorder, rotate, duplicate, or delete pages interactively.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Organize &amp; Pages</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 9. Compress PDF -->
+          <a
+            href="./compress-pdf/index.html"
+            data-tool-id="compress-pdf"
+            class="tool-card"
+            data-category="optimize"
+            data-status="active"
+            data-keywords="compress shrink reduce file size optimize smaller dpi quality"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Compress PDF</h2>
+              <p class="tool-card-desc">
+                Reduce PDF file size by re-encoding pages at custom resolution and JPEG quality presets.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Optimize Size</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 10. Extract Text & Images -->
+          <a
+            href="./extract-pdf/index.html"
+            class="tool-card"
+            data-tool-id="extract-pdf"
+            data-category="convert-from-pdf"
+            data-status="active"
+            data-keywords="extract text txt copy images export pages content"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → TXT</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Extract Text &amp; Images</h2>
+              <p class="tool-card-desc">
+                Pull selectable text streams into a .txt file or batch-export page images into a ZIP.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Export &amp; Extract</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 11. Edit PDF Metadata -->
+          <a
+            href="./metadata-pdf/index.html"
+            class="tool-card"
+            data-tool-id="metadata-pdf"
+            data-category="edit"
+            data-status="active"
+            data-keywords="metadata title author subject keywords properties"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Edit PDF Metadata</h2>
+              <p class="tool-card-desc">
+                Inspect, modify, or strip document Title, Author, Subject, and Keywords headers.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Edit &amp; Sign</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 12. Grayscale PDF -->
+          <a
+            href="./grayscale-pdf/index.html"
+            class="tool-card"
+            data-tool-id="grayscale-pdf"
+            data-category="optimize"
+            data-status="active"
+            data-keywords="grayscale black and white monochrome print"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20z"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Grayscale PDF</h2>
+              <p class="tool-card-desc">
+                Convert colored PDF pages into monochrome black-and-white documents for printing.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Optimize Size</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 13. Crop PDF Margins -->
+          <a
+            href="./crop-pdf/index.html"
+            class="tool-card"
+            data-tool-id="crop-pdf"
+            data-category="organize"
+            data-status="active"
+            data-keywords="crop trim margins white space page box dimensions"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.13 1L6 16a2 2 0 0 0 2 2h15"/><path d="M1 6.13L16 6a2 2 0 0 1 2 2v15"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Crop PDF Margins</h2>
+              <p class="tool-card-desc">
+                Trim excess page margins or set custom CropBox dimensions across selected pages.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Organize &amp; Pages</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 14. Image Format Converter -->
+          <a
+            href="./image-converter/index.html"
+            class="tool-card"
+            data-tool-id="image-converter"
+            data-category="convert-from-pdf"
+            data-status="active"
+            data-keywords="webp png jpg image converter resize"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">IMG → IMG</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Image Converter (WebP / PNG / JPG)</h2>
+              <p class="tool-card-desc">
+                Batch-convert and resize images between WebP, PNG, and JPG locally in your browser.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Export &amp; Extract</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 15. Flatten PDF Forms -->
+          <a
+            href="./flatten-pdf/index.html"
+            class="tool-card"
+            data-tool-id="flatten-pdf"
+            data-category="edit"
+            data-status="active"
+            data-keywords="flatten pdf form fields acroform lock non-editable bake layers"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Flatten PDF Forms</h2>
+              <p class="tool-card-desc">
+                Lock interactive AcroForm inputs, checkboxes, and annotations into static non-editable page content.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Edit &amp; Sign</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 16. Insert Blank Pages -->
+          <a
+            href="./insert-blank-pdf/index.html"
+            class="tool-card"
+            data-tool-id="insert-blank-pdf"
+            data-category="organize"
+            data-status="active"
+            data-keywords="insert add blank pages interleaved notes handouts page breaks"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Insert Blank Pages</h2>
+              <p class="tool-card-desc">
+                Add blank pages before or after specific pages, or interleave blank note pages after every page.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Organize &amp; Pages</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 17. Header, Footer & Bates Numbering -->
+          <a
+            href="./header-footer-pdf/index.html"
+            class="tool-card"
+            data-tool-id="header-footer-pdf"
+            data-category="edit"
+            data-status="active"
+            data-keywords="header footer bates numbering legal exhibit stamp running pagination"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="16" x2="21" y2="16"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Header, Footer &amp; Bates</h2>
+              <p class="tool-card-desc">
+                Stamp 3-column running top headers, bottom footers, dates, and sequential legal Bates numbers.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Edit &amp; Sign</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 18. N-Up Page Grid -->
+          <a
+            href="./nup-pdf/index.html"
+            class="tool-card"
+            data-tool-id="nup-pdf"
+            data-category="organize"
+            data-status="active"
+            data-keywords="nup 2-up 4-up 6-up multiple pages per sheet booklet slides handout"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">N-Up Page Grid (2-Up / 4-Up)</h2>
+              <p class="tool-card-desc">
+                Combine 2, 4, or 6 pages onto each A4 or Letter sheet for compact slide handouts and printing.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Organize &amp; Pages</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 19. Redact PDF -->
+          <a
+            href="./redact-pdf/index.html"
+            class="tool-card"
+            data-tool-id="redact-pdf"
+            data-category="edit"
+            data-status="active"
+            data-keywords="redact blackout censor remove sensitive text privacy sanitize"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">PDF → PDF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Redact PDF</h2>
+              <p class="tool-card-desc">
+                Draw blackout boxes over confidential text and raster-bake redacted pages to destroy underlying text.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Edit &amp; Sign</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+
+          <!-- 20. Compare Two PDFs -->
+          <a
+            href="./compare-pdf/index.html"
+            class="tool-card"
+            data-tool-id="compare-pdf"
+            data-category="optimize"
+            data-status="active"
+            data-keywords="compare diff two pdfs revisions side by side differences highlight"
+          >
+            <div>
+              <div class="tool-card-top">
+                <div class="tool-icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="8" height="16" rx="1"/><rect x="14" y="4" width="8" height="16" rx="1"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
+                </div>
+                <div class="tool-badges">
+                  <span class="io-badge">2× PDF → DIFF</span>
+                  <span class="status-badge active">Active</span>
+                </div>
+              </div>
+              <h2 class="tool-card-title">Compare Two PDFs</h2>
+              <p class="tool-card-desc">
+                Compare two PDF versions side-by-side and highlight visual pixel and text changes in crimson red.
+              </p>
+            </div>
+            <div class="tool-card-footer">
+              <span>Optimize &amp; Inspect</span>
+              <span class="tool-card-cta">Launch →</span>
+            </div>
+          </a>
+        </main>
+
+        <!-- Empty Search/Filter State -->
+        <div id="hub-empty-state" class="hub-empty-state" hidden>
+          <p class="hub-empty-title">No matching tools found</p>
+          <p class="hub-empty-desc">Try another keyword or reset the active category and status filters.</p>
+          <button type="button" id="hub-reset-filters" class="secondary-btn">Reset All Filters</button>
+        </div>
+
+        <!-- Hub Status Banner -->
+        <div id="hub-status-banner" class="status-banner info" hidden style="margin-top: 16px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./shared/utils.js"></script>
+<script>
+  (function () {
+    'use strict';
+
+    const app = document.getElementById('pdf-tool-app');
+    if (!app) return;
+
+    const searchInput = document.getElementById('hub-search-input');
+    const searchClearBtn = document.getElementById('hub-search-clear');
+    const kbdHint = document.getElementById('hub-kbd-hint');
+    const categoryButtons = Array.from(app.querySelectorAll('.category-pill'));
+    const statusButtons = Array.from(app.querySelectorAll('.status-filter-btn'));
+    const toolCards = Array.from(app.querySelectorAll('.tool-card'));
+    const resultsSummary = document.getElementById('hub-results-summary');
+    const activeCounter = document.getElementById('hub-active-counter');
+    const emptyState = document.getElementById('hub-empty-state');
+    const resetFiltersBtn = document.getElementById('hub-reset-filters');
+    const statusBannerId = 'hub-status-banner';
+
+    let currentCategory = 'all';
+    let currentStatus = 'all';
+    let currentQuery = '';
+
+    function refreshCatalogCounts() {
+      const countsByCategory = { all: toolCards.length };
+      let activeCount = 0;
+      let plannedCount = 0;
+
+      toolCards.forEach((card) => {
+        const cat = card.getAttribute('data-category') || 'other';
+        const status = card.getAttribute('data-status') || 'planned';
+        countsByCategory[cat] = (countsByCategory[cat] || 0) + 1;
+        if (status === 'active') {
+          activeCount += 1;
+        } else {
+          plannedCount += 1;
+        }
+      });
+
+      categoryButtons.forEach((btn) => {
+        const cat = btn.getAttribute('data-category');
+        const countEl = btn.querySelector('[data-count-for]');
+        if (countEl && cat) {
+          countEl.textContent = String(countsByCategory[cat] || 0);
+        }
+      });
+
+      if (activeCounter) {
+        activeCounter.textContent = `${activeCount} Active • ${plannedCount} Planned`;
+      }
+    }
+
+    function applyFilters() {
+      const query = currentQuery.trim().toLowerCase();
+      let visibleCount = 0;
+
+      toolCards.forEach((card) => {
+        const cardCat = card.getAttribute('data-category') || '';
+        const cardStatus = card.getAttribute('data-status') || 'planned';
+        const title = (card.querySelector('.tool-card-title')?.textContent || '').toLowerCase();
+        const desc = (card.querySelector('.tool-card-desc')?.textContent || '').toLowerCase();
+        const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+
+        const matchesCategory = currentCategory === 'all' || cardCat === currentCategory;
+        const matchesStatus = currentStatus === 'all' || cardStatus === currentStatus;
+        const matchesQuery =
+          !query ||
+          title.includes(query) ||
+          desc.includes(query) ||
+          keywords.includes(query) ||
+          cardCat.includes(query);
+
+        const isVisible = matchesCategory && matchesStatus && matchesQuery;
+        card.hidden = !isVisible;
+        if (isVisible) visibleCount += 1;
+      });
+
+      const hasQuery = currentQuery.length > 0;
+      if (searchClearBtn) searchClearBtn.hidden = !hasQuery;
+      if (kbdHint) kbdHint.hidden = hasQuery;
+      if (emptyState) emptyState.hidden = visibleCount > 0;
+
+      if (resultsSummary) {
+        const total = toolCards.length;
+        if (visibleCount === total && !query && currentCategory === 'all' && currentStatus === 'all') {
+          resultsSummary.textContent = `Showing all ${total} tools`;
+        } else {
+          resultsSummary.textContent = `Showing ${visibleCount} of ${total} tools`;
+        }
+      }
+    }
+
+    categoryButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        categoryButtons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.getAttribute('data-category') || 'all';
+        applyFilters();
+      });
+    });
+
+    statusButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        statusButtons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentStatus = btn.getAttribute('data-status-filter') || 'all';
+        applyFilters();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        currentQuery = e.target.value || '';
+        applyFilters();
+      });
+    }
+
+    // Keyboard shortcut: press '/' to focus search, 'Escape' to clear
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) {
+        e.preventDefault();
+        searchInput?.focus();
+      } else if (e.key === 'Escape' && document.activeElement === searchInput && currentQuery) {
+        searchInput.value = '';
+        currentQuery = '';
+        applyFilters();
+      }
+    });
+
+    if (searchClearBtn && searchInput) {
+      searchClearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        currentQuery = '';
+        searchInput.focus();
+        applyFilters();
+      });
+    }
+
+    if (resetFiltersBtn) {
+      resetFiltersBtn.addEventListener('click', () => {
+        currentCategory = 'all';
+        currentStatus = 'all';
+        currentQuery = '';
+        if (searchInput) searchInput.value = '';
+        categoryButtons.forEach((b) => b.classList.toggle('active', b.getAttribute('data-category') === 'all'));
+        statusButtons.forEach((b) => b.classList.toggle('active', b.getAttribute('data-status-filter') === 'all'));
+        if (window.PDFToolUtils) window.PDFToolUtils.clearStatus(statusBannerId);
+        applyFilters();
+      });
+    }
+
+    toolCards.forEach((card) => {
+      card.addEventListener('click', (e) => {
+        const status = card.getAttribute('data-status');
+        if (status === 'planned') {
+          e.preventDefault();
+          const title = card.querySelector('.tool-card-title')?.textContent || 'This tool';
+          if (window.PDFToolUtils) {
+            window.PDFToolUtils.showStatus(
+              statusBannerId,
+              `"${title}" is marked as Planned on the roadmap.`,
+              'info'
+            );
+          }
+        }
+      });
+    });
+
+    refreshCatalogCounts();
+    applyFilters();
+  })();
+</script>
+<!-- ================= BLOGGER PASTE END ================= -->
+
+</body>
+</html>

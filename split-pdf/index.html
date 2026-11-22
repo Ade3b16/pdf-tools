@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Split PDF — Local Browser PDF Utility</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fafafa;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= BLOGGER PASTE START ================= -->
+<link rel="stylesheet" href="../shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="../index.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">Split PDF</h1>
+    <p class="tool-subtitle">
+      Extract custom page ranges into a single PDF or split pages into separate PDF files in a ZIP archive.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section id="split-upload-panel" class="tool-panel" aria-label="Select PDF file">
+      <div
+        id="split-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop a PDF file here or click to select a file"
+      >
+        <h2 class="dropzone-title">Drop a PDF file here, or click to select</h2>
+        <p class="dropzone-hint">Accepts a single .pdf file.</p>
+        <span class="dropzone-btn">Select PDF File</span>
+        <input
+          type="file"
+          id="split-file-input"
+          class="sr-only-input"
+          accept=".pdf,application/pdf"
+        />
+      </div>
+    </section>
+
+    <div id="split-status" class="status-banner info" hidden></div>
+
+    <section id="split-config-panel" class="tool-panel" hidden aria-label="Split PDF settings">
+      <div class="file-list-header" style="margin-bottom: 16px;">
+        <div class="file-item" style="width: 100%;">
+          <div class="file-item-info">
+            <div class="file-item-details">
+              <div id="split-file-name" class="file-item-name">document.pdf</div>
+              <div id="split-file-meta" class="file-item-meta">0 KB • 0 pages</div>
+            </div>
+          </div>
+          <div class="file-item-actions">
+            <button type="button" id="split-change-file-btn" class="secondary-btn">Change File</button>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Split Mode</h2>
+      <div class="options-grid" role="radiogroup" aria-label="Split mode">
+        <label class="option-card selected" data-mode-card="extract">
+          <input type="radio" name="split-mode" value="extract" checked />
+          <div>
+            <div class="option-card-title">Extract Range (Single PDF)</div>
+            <div class="option-card-desc">
+              Combine selected pages or ranges (e.g. 1-3, 5) into one PDF file.
+            </div>
+          </div>
+        </label>
+
+        <label class="option-card" data-mode-card="burst-all">
+          <input type="radio" name="split-mode" value="burst-all" />
+          <div>
+            <div class="option-card-title">Every Page to ZIP</div>
+            <div class="option-card-desc">
+              Save each page of the document as an individual PDF inside a .zip file.
+            </div>
+          </div>
+        </label>
+
+        <label class="option-card" data-mode-card="burst-ranges">
+          <input type="radio" name="split-mode" value="burst-ranges" />
+          <div>
+            <div class="option-card-title">Each Range to Separate PDF (ZIP)</div>
+            <div class="option-card-desc">
+              Save each comma-separated range (e.g. 1-3, 4-6) as a separate PDF in a .zip file.
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <div id="split-range-group" class="form-group" style="margin-top: 16px;">
+        <label for="split-range-input" class="form-label">Page Ranges</label>
+        <input
+          type="text"
+          id="split-range-input"
+          class="form-input"
+          placeholder="e.g. 1-3, 5, 8-10"
+          value="1"
+        />
+        <span id="split-range-hint" class="form-hint">
+          Enter page numbers and/or hyphenated ranges separated by commas.
+        </span>
+      </div>
+
+      <div class="action-bar" style="margin-top: 16px;">
+        <button type="button" id="split-submit-btn" class="primary-btn">
+          <span>Split PDF</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="../shared/utils.js"></script>
+<script src="./split-pdf.js"></script>
+<!-- ================= BLOGGER PASTE END ================= -->
+
+</body>
+</html>

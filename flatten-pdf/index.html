@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flatten PDF Forms &amp; Layers — Local Browser PDF Utility</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= BLOGGER PASTE START ================= -->
+<link rel="stylesheet" href="../shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="../index.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">Flatten PDF Forms &amp; Layers</h1>
+    <p class="tool-subtitle">
+      Lock interactive AcroForm fields (text inputs, checkboxes, dropdowns) into static, non-editable PDF content.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select PDF file">
+      <div
+        id="flat-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop a PDF file here or click to select a file"
+      >
+        <h2 class="dropzone-title">Drop a PDF file here, or click to select</h2>
+        <p class="dropzone-hint">Accepts a single .pdf file with form fields or annotations.</p>
+        <span class="dropzone-btn">Select PDF File</span>
+        <input
+          type="file"
+          id="flat-file-input"
+          class="sr-only-input"
+          accept=".pdf,application/pdf"
+        />
+      </div>
+    </section>
+
+    <div id="flat-status" class="status-banner info" hidden></div>
+
+    <section id="flat-config-panel" class="tool-panel" hidden aria-label="Flatten PDF settings">
+      <div class="file-list-header" style="margin-bottom: 16px;">
+        <div class="file-item" style="width: 100%;">
+          <div class="file-item-info">
+            <div class="file-item-details">
+              <div id="flat-file-name" class="file-item-name">document.pdf</div>
+              <div id="flat-file-meta" class="file-item-meta">0 KB • 0 pages • 0 form fields</div>
+            </div>
+          </div>
+          <div class="file-item-actions">
+            <button type="button" id="flat-change-file-btn" class="secondary-btn">Change File</button>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">Flatten Method</h2>
+      <div class="options-grid" role="radiogroup" aria-label="Flatten mode">
+        <label class="option-card selected" data-flat-card="acroform">
+          <input type="radio" name="flat-mode" value="acroform" checked />
+          <div>
+            <div class="option-card-title">Flatten Interactive Form Fields (Vector)</div>
+            <div class="option-card-desc">
+              Converts AcroForm inputs, checkboxes, and radio buttons into static vector content while keeping text selectable.
+            </div>
+          </div>
+        </label>
+
+        <label class="option-card" data-flat-card="raster">
+          <input type="radio" name="flat-mode" value="raster" />
+          <div>
+            <div class="option-card-title">Full Page Layer Bake (150 DPI Raster)</div>
+            <div class="option-card-desc">
+              Renders every page into a flat image layer so no form fields, stamps, or vector text layers can be edited.
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <div class="action-bar" style="margin-top: 20px;">
+        <button type="button" id="flat-submit-btn" class="primary-btn">
+          <span>Flatten &amp; Download PDF</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="../shared/utils.js"></script>
+<script src="./flatten-pdf.js"></script>
+<!-- ================= BLOGGER PASTE END ================= -->
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crop PDF Margins — Local Browser PDF Utility</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= BLOGGER PASTE START ================= -->
+<link rel="stylesheet" href="../shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="../index.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">Crop PDF Margins</h1>
+    <p class="tool-subtitle">
+      Trim excess white margins or set custom Top, Bottom, Left, and Right crop insets with a live page preview.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select PDF file">
+      <div
+        id="crop-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop a PDF file here or click to select a file"
+      >
+        <h2 class="dropzone-title">Drop a PDF file here, or click to select</h2>
+        <p class="dropzone-hint">Accepts a single .pdf file.</p>
+        <span class="dropzone-btn">Select PDF File</span>
+        <input
+          type="file"
+          id="crop-file-input"
+          class="sr-only-input"
+          accept=".pdf,application/pdf"
+        />
+      </div>
+    </section>
+
+    <div id="crop-status" class="status-banner info" hidden></div>
+
+    <section id="crop-config-panel" class="tool-panel" hidden aria-label="Crop margin settings">
+      <div class="file-list-header" style="margin-bottom: 16px;">
+        <div class="file-item" style="width: 100%;">
+          <div class="file-item-info">
+            <div class="file-item-details">
+              <div id="crop-file-name" class="file-item-name">document.pdf</div>
+              <div id="crop-file-meta" class="file-item-meta">0 KB • 0 pages</div>
+            </div>
+          </div>
+          <div class="file-item-actions">
+            <button type="button" id="crop-preset-20" class="secondary-btn">Trim 20 pt All</button>
+            <button type="button" id="crop-preset-36" class="secondary-btn">Trim 36 pt All</button>
+            <button type="button" id="crop-reset-btn" class="secondary-btn">Reset 0 pt</button>
+            <button type="button" id="crop-change-file-btn" class="secondary-btn">Change File</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="crop-top" class="form-label">Top Margin Trim (pt)</label>
+          <input type="number" id="crop-top" class="form-input" value="24" min="0" max="400" />
+        </div>
+
+        <div class="form-group">
+          <label for="crop-bottom" class="form-label">Bottom Margin Trim (pt)</label>
+          <input type="number" id="crop-bottom" class="form-input" value="24" min="0" max="400" />
+        </div>
+
+        <div class="form-group">
+          <label for="crop-left" class="form-label">Left Margin Trim (pt)</label>
+          <input type="number" id="crop-left" class="form-input" value="24" min="0" max="400" />
+        </div>
+
+        <div class="form-group">
+          <label for="crop-right" class="form-label">Right Margin Trim (pt)</label>
+          <input type="number" id="crop-right" class="form-input" value="24" min="0" max="400" />
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top: 16px;">
+        <label for="crop-range" class="form-label">Pages to Crop</label>
+        <input
+          type="text"
+          id="crop-range"
+          class="form-input"
+          value="all"
+          placeholder="all or e.g. 1-5"
+        />
+        <span id="crop-range-hint" class="form-hint">72 pt = 1 inch (25.4 mm). Enter "all" or custom page ranges.</span>
+      </div>
+
+      <div style="margin-top: 20px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+          <span class="form-label">Live Crop Area Preview</span>
+          <div style="display: inline-flex; align-items: center; gap: 6px;">
+            <button type="button" id="crop-prev-page" class="icon-btn" aria-label="Previous page">←</button>
+            <span id="crop-page-indicator" class="file-count-badge">Page 1 of 1</span>
+            <button type="button" id="crop-next-page" class="icon-btn" aria-label="Next page">→</button>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-start; overflow: auto;">
+          <canvas
+            id="crop-preview-canvas"
+            style="border: 1px solid var(--border-strong); background: #ffffff; border-radius: 4px; max-width: 100%; height: auto;"
+          ></canvas>
+        </div>
+      </div>
+
+      <div class="action-bar" style="margin-top: 20px;">
+        <button type="button" id="crop-submit-btn" class="primary-btn">
+          <span>Crop PDF</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="../shared/utils.js"></script>
+<script src="./crop-pdf.js"></script>
+<!-- ================= BLOGGER PASTE END ================= -->
+
+</body>
+</html>

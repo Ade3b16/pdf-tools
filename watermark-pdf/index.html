@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Numbers &amp; Watermark — Local Browser PDF Utility</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fafafa;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= BLOGGER PASTE START ================= -->
+<link rel="stylesheet" href="../shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="../index.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">Page Numbers &amp; Watermark</h1>
+    <p class="tool-subtitle">
+      Stamp formatted page numbers or text watermarks across all or selected pages of a PDF.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select PDF file">
+      <div
+        id="wm-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop a PDF file here or click to select a file"
+      >
+        <h2 class="dropzone-title">Drop a PDF file here, or click to select</h2>
+        <p class="dropzone-hint">Accepts a single .pdf file.</p>
+        <span class="dropzone-btn">Select PDF File</span>
+        <input
+          type="file"
+          id="wm-file-input"
+          class="sr-only-input"
+          accept=".pdf,application/pdf"
+        />
+      </div>
+    </section>
+
+    <div id="wm-status" class="status-banner info" hidden></div>
+
+    <section id="wm-config-panel" class="tool-panel" hidden aria-label="Page numbers and watermark settings">
+      <div class="file-list-header" style="margin-bottom: 16px;">
+        <div class="file-item" style="width: 100%;">
+          <div class="file-item-info">
+            <div class="file-item-details">
+              <div id="wm-file-name" class="file-item-name">document.pdf</div>
+              <div id="wm-file-meta" class="file-item-meta">0 KB • 0 pages</div>
+            </div>
+          </div>
+          <div class="file-item-actions">
+            <button type="button" id="wm-change-file-btn" class="secondary-btn">Change File</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+        <h2 class="section-title" style="margin-bottom: 0;">Stamp Mode</h2>
+        <div class="toggle-tabs" role="tablist" aria-label="Stamp mode tabs">
+          <button
+            type="button"
+            class="toggle-tab active"
+            role="tab"
+            aria-selected="true"
+            data-wm-tab="page-numbers"
+          >
+            Page Numbers
+          </button>
+          <button
+            type="button"
+            class="toggle-tab"
+            role="tab"
+            aria-selected="false"
+            data-wm-tab="watermark"
+          >
+            Text Watermark
+          </button>
+        </div>
+      </div>
+
+      <div id="wm-panel-page-numbers" class="form-grid">
+        <div class="form-group">
+          <label for="pn-position" class="form-label">Position</label>
+          <select id="pn-position" class="form-select">
+            <option value="bottom-center" selected>Bottom Center</option>
+            <option value="bottom-right">Bottom Right</option>
+            <option value="bottom-left">Bottom Left</option>
+            <option value="top-center">Top Center</option>
+            <option value="top-right">Top Right</option>
+            <option value="top-left">Top Left</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="pn-format" class="form-label">Format</label>
+          <select id="pn-format" class="form-select">
+            <option value="page-n-of-total" selected>Page 1 of N</option>
+            <option value="n-slash-total">1 / N</option>
+            <option value="n-only">1</option>
+            <option value="dash-n-dash">- 1 -</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="pn-start-num" class="form-label">Starting Number</label>
+          <input type="number" id="pn-start-num" class="form-input" value="1" min="1" max="99999" />
+        </div>
+
+        <div class="form-group">
+          <label for="pn-font-size" class="form-label">Font Size (pt)</label>
+          <input type="number" id="pn-font-size" class="form-input" value="11" min="6" max="48" />
+        </div>
+      </div>
+
+      <div id="wm-panel-watermark" class="form-grid" hidden>
+        <div class="form-group">
+          <label for="wt-text" class="form-label">Watermark Text</label>
+          <input
+            type="text"
+            id="wt-text"
+            class="form-input"
+            value="CONFIDENTIAL"
+            placeholder="CONFIDENTIAL"
+            maxlength="80"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="wt-placement" class="form-label">Placement</label>
+          <select id="wt-placement" class="form-select">
+            <option value="diagonal" selected>Diagonal Center (45°)</option>
+            <option value="center">Horizontal Center (0°)</option>
+            <option value="top-center">Top Header</option>
+            <option value="bottom-center">Bottom Footer</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="wt-font-size" class="form-label">Font Size</label>
+          <div class="range-slider-row">
+            <input type="range" id="wt-font-size" min="16" max="120" value="54" />
+            <span id="wt-font-size-badge" class="range-value-badge">54 pt</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="wt-opacity" class="form-label">Opacity</label>
+          <div class="range-slider-row">
+            <input type="range" id="wt-opacity" min="5" max="100" step="5" value="25" />
+            <span id="wt-opacity-badge" class="range-value-badge">25%</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="wt-color" class="form-label">Color</label>
+          <select id="wt-color" class="form-select">
+            <option value="gray" selected>Gray</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="black">Black</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top: 16px;">
+        <label for="wm-page-range" class="form-label">Pages to Stamp</label>
+        <input
+          type="text"
+          id="wm-page-range"
+          class="form-input"
+          value="all"
+          placeholder="all or e.g. 2-10"
+        />
+        <span id="wm-page-range-hint" class="form-hint">
+          Use "all" for every page, or enter a range like "2-10".
+        </span>
+      </div>
+
+      <div class="action-bar" style="margin-top: 16px;">
+        <button type="button" id="wm-submit-btn" class="primary-btn">
+          <span id="wm-submit-label">Apply Page Numbers</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="../shared/utils.js"></script>
+<script src="./watermark-pdf.js"></script>
+<!-- ================= BLOGGER PASTE END ================= -->
+
+</body>
+</html>

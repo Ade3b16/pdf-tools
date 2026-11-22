@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grayscale PDF — Local Browser PDF Utility</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= BLOGGER PASTE START ================= -->
+<link rel="stylesheet" href="../shared/tools.css" />
+
+<div id="pdf-tool-app">
+  <nav class="pdf-tool-nav" aria-label="Tool navigation">
+    <a href="../index.html" class="back-link">← All Tools</a>
+  </nav>
+
+  <header class="tool-header">
+    <h1 class="tool-title">Grayscale PDF</h1>
+    <p class="tool-subtitle">
+      Convert colored PDF documents into black-and-white grayscale pages for printing or archiving.
+    </p>
+  </header>
+
+  <main class="tool-workspace">
+    <section class="tool-panel" aria-label="Select PDF file">
+      <div
+        id="gray-dropzone"
+        class="dropzone"
+        role="button"
+        tabindex="0"
+        aria-label="Drop a PDF file here or click to select a file"
+      >
+        <h2 class="dropzone-title">Drop a PDF file here, or click to select</h2>
+        <p class="dropzone-hint">Accepts a single .pdf file.</p>
+        <span class="dropzone-btn">Select PDF File</span>
+        <input
+          type="file"
+          id="gray-file-input"
+          class="sr-only-input"
+          accept=".pdf,application/pdf"
+        />
+      </div>
+    </section>
+
+    <div id="gray-status" class="status-banner info" hidden></div>
+
+    <section id="gray-config-panel" class="tool-panel" hidden aria-label="Grayscale conversion settings">
+      <div class="file-list-header" style="margin-bottom: 16px;">
+        <div class="file-item" style="width: 100%;">
+          <div class="file-item-info">
+            <div class="file-item-details">
+              <div id="gray-file-name" class="file-item-name">document.pdf</div>
+              <div id="gray-file-meta" class="file-item-meta">0 KB • 0 pages</div>
+            </div>
+          </div>
+          <div class="file-item-actions">
+            <button type="button" id="gray-change-file-btn" class="secondary-btn">Change File</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="gray-contrast" class="form-label">Grayscale Mode</label>
+          <select id="gray-contrast" class="form-select">
+            <option value="standard" selected>Standard Luminance (Balanced Tones)</option>
+            <option value="high-contrast">High Contrast (Crisper Dark Text)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="gray-scale" class="form-label">Render Resolution</label>
+          <select id="gray-scale" class="form-select">
+            <option value="1.5">110 DPI (Compact File Size)</option>
+            <option value="2.0" selected>150 DPI (Standard Print)</option>
+            <option value="2.6">200 DPI (Sharp Detail)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="gray-range" class="form-label">Pages to Convert</label>
+          <input
+            type="text"
+            id="gray-range"
+            class="form-input"
+            value="all"
+            placeholder="all or e.g. 1-5"
+          />
+          <span id="gray-range-hint" class="form-hint">Use "all" or custom page ranges. Unselected pages remain in color.</span>
+        </div>
+      </div>
+
+      <div class="action-bar" style="margin-top: 20px;">
+        <button type="button" id="gray-submit-btn" class="primary-btn">
+          <span>Convert to Grayscale</span>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script src="../shared/utils.js"></script>
+<script src="./grayscale-pdf.js"></script>
+<!-- ================= BLOGGER PASTE END ================= -->
+
+</body>
+</html>
